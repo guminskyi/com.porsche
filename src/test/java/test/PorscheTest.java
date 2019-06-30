@@ -85,6 +85,35 @@ public class PorscheTest {
         int actualPriceForEq = Integer.valueOf(driver.findElement(By.xpath("/html[1]/body[1]/div[5]/div[4]/section[1]/div[1]/div[4]/div[2]")).getText().replace("$", "").replace(",", ""));
         int expectedPriceForEq = Integer.valueOf(carreraWheels.getAttribute("data-price").replace("$", "").replace(",", "")) + Integer.valueOf(miamiBlue.getAttribute("data-price").replace("$", "").replace(",", "")) ;
         Assert.assertEquals(actualPriceForEq,expectedPriceForEq);
+
+    }
+    @Test(priority = 18)
+    public void test18() {
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        WebElement interiorCarbonFiber = driver.findElement(By.xpath("//div[@id ='IIC_subHdl']"));
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", interiorCarbonFiber);
+    }
+    @Test(priority = 19)
+    public void test19() {
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        WebElement interiorTrimInCarbonFiber = driver.findElement(By.id("vs_table_IIC_x_PEKH_x_c01_PEKH"));
+        JavascriptExecutor executor1 = (JavascriptExecutor) driver;
+        executor1.executeScript("arguments[0].click();", interiorTrimInCarbonFiber);
+    }
+    @Test(priority = 20)
+    public void test20() {
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        WebElement priceForEquipment = driver.findElement(By.xpath("//div[@class='row']//div[@class='cca-price']"));
+        priceForEquipment.click();
+    }
+    @Test(priority = 21)
+    public void test21(){
+        driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
+        WebElement totalPrice = driver.findElement(By.xpath("//div[@class='cca-price']"));
+        totalPrice.click();
+
+
     }
 
 }

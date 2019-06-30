@@ -10,8 +10,10 @@ import org.junit.runner.RunWith;
 				"json:target/cucumber.json", "com.cucumber.listener.ExtentCucumberFormatter:target/report.html"},
 		features="src/test/resources/features",
 		glue="steps",
-		tags="@goo",
+		tags="@porsche",
 		dryRun=false
+
+
 )
 public class CukesRunner {
 
