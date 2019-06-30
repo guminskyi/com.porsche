@@ -10,6 +10,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+import org.testng.annotations.*;
+import utilities.BrowserUtils;
+import utilities.Driver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.testng.Assert;
@@ -22,24 +26,24 @@ public class PorscheTest {
     WebDriver driver;
 
     @BeforeClass
-    public void setup() {
-        driver = Driver.getDriver();
-        driver.manage().window().maximize();
-        driver.get("https://porsche.com/usa/modelstart");
-        WebElement porsche718 = driver.findElement(By.xpath("//img[@alt='Porsche - 718']"));
-        porsche718.click();
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        WebElement porsche718PriceElement = driver.findElement(By.cssSelector("body.pool-usa.lang-none:nth-child(2)" +
-                " div.b-page-wrapper.page.nonavi:nth-child(1) div.m-14-model-overview.m-14-cc.m-14-model-overview--initialized:nth-child(6)" +
-                " div.m-14-models-view.module-container:nth-child(1) div.module-grid div.m-14-result-row.m-14-result-context.content-full-width div.m-14-model-series.module-grid:nth-child(2)" +
-                " div.m-14-model-tile.visible:nth-child(3) div.m-14-model-tile-link-overview div.m-14-model-tile-title > div.m-14-model-price"));
-        porsche718PriceElement.click();
-        List<String> allHandles = new ArrayList<>(driver.getWindowHandles());
-        driver.switchTo().window(allHandles.get(1));  // <=== switching to 718 Cayman S window
-        WebElement priceExpandBtn = driver.findElement(By.xpath("//*[@id=\"s_iccCca\"]/div[1]/div[4]/div[1]/span"));
-        priceExpandBtn.click();
+        public void setup() {
+            driver = Driver.getDriver();
+            driver.manage().window().maximize();
+            driver.get("https://porsche.com/usa/modelstart");
+            WebElement porsche718 = driver.findElement(By.xpath("//img[@alt='Porsche - 718']"));
+            porsche718.click();
+            driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+            WebElement porsche718PriceElement = driver.findElement(By.cssSelector("body.pool-usa.lang-none:nth-child(2)" +
+                    " div.b-page-wrapper.page.nonavi:nth-child(1) div.m-14-model-overview.m-14-cc.m-14-model-overview--initialized:nth-child(6)" +
+                    " div.m-14-models-view.module-container:nth-child(1) div.module-grid div.m-14-result-row.m-14-result-context.content-full-width div.m-14-model-series.module-grid:nth-child(2)" +
+                    " div.m-14-model-tile.visible:nth-child(3) div.m-14-model-tile-link-overview div.m-14-model-tile-title > div.m-14-model-price"));
+            porsche718PriceElement.click();
+            List<String> allHandles = new ArrayList<>(driver.getWindowHandles());
+            driver.switchTo().window(allHandles.get(1));  // <=== switching to 718 Cayman S window
+            WebElement priceExpandBtn = driver.findElement(By.xpath("//*[@id=\"s_iccCca\"]/div[1]/div[4]/div[1]/span"));
+            priceExpandBtn.click();
 
-    }
+        }
 
     @Test(priority = 10)
     public void test10() {
@@ -223,5 +227,166 @@ public class PorscheTest {
 
         }
 
+    @Test(priority = 24)
+    public void test24() {
+        WebElement porsche718 = driver.findElement(By.xpath("//img[@alt='Porsche - 718']"));
+        porsche718.click();
+
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.manage().window().maximize();
+
+        WebElement porsche718PriceElement = driver.findElement(By.cssSelector
+                ("[data-model-id='1'] [class='m-14-model-price']"));
+        porsche718PriceElement.click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+
+        String currentWindow = driver.getWindowHandle();
+        Set<String> handles = driver.getWindowHandles();
+        for (String each : handles) {
+            if (!currentWindow.equals(each)) {
+                driver.switchTo().window(each);
+                System.out.println("window switched.");
+                break;
+            }
+        }
+
+        WebElement miamiBlue = driver.findElement(By.xpath("//li[@id='s_exterieur_x_FJ5']"));
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        jse.executeScript("arguments[0].click();", miamiBlue);
+
+        String miamiBluePrice = miamiBlue.getAttribute("data-price");
+        System.out.println(miamiBluePrice);
+        miamiBluePrice = miamiBluePrice.substring(1).replace
+                (",", "").replace(".","");
+        int miamiBluePriceInt = Integer.parseInt(miamiBluePrice);
+
+        WebElement twentyCarreraSportsWheels = driver.findElement(By.xpath("//li[@id='s_exterieur_x_MXRD']"));
+        twentyCarreraSportsWheels.click();
+        String wheelsPrice = twentyCarreraSportsWheels.getAttribute("data-price");
+        wheelsPrice = wheelsPrice.substring(1).replace(",", "").replace(".","");
+        System.out.println(wheelsPrice);
+        int wheelsPriceInt = Integer.parseInt(wheelsPrice);
+
+        WebElement powerSportSeats14WayWithMemoryPackage = driver.findElement(By.id("s_interieur_x_PP06"));
+        jse.executeScript("arguments[0].click();", powerSportSeats14WayWithMemoryPackage);
+
+        WebElement seatsPrice = driver.findElement(By.xpath
+                ("/html[1]/body[1]/div[5]/section[1]/section[2]/div[2]/div[2]/" +
+                        "div[2]/div[1]/div[2]/div[2]/div[2]/div[1]/div[4]/div[1]"));
+        jse.executeScript("arguments[0].click();", seatsPrice);
+
+        String seatsPriceString = seatsPrice.getText();
+        seatsPriceString = seatsPriceString.substring(1).replace
+                (",", "").replace(".","");
+        int seatsPriceInt = Integer.parseInt(seatsPriceString);
+
+        WebElement interiorCarbonFiber = driver.findElement(By.id("IIC_subHdl"));
+        jse.executeScript("arguments[0].click();", interiorCarbonFiber);
+
+        WebElement interiorTrimInCarbonFiberICWStandardInterior = driver.findElement(By.id
+                ("vs_table_IIC_x_PEKH_x_c01_PEKH"));
+        jse.executeScript("arguments[0].click();", interiorTrimInCarbonFiberICWStandardInterior);
+
+        WebElement interiorTrimInCarbonPrice = driver.findElement(By.xpath
+                ("//*[@id=\"vs_table_IIC_x_PEKH\"]/div[1]/div[3]/div"));
+        jse.executeScript("arguments[0].click();", interiorTrimInCarbonPrice);
+
+        String interiorTrimInCarbonPriceString = interiorTrimInCarbonPrice.getText();
+        interiorTrimInCarbonPriceString = interiorTrimInCarbonPriceString.substring(1).replace
+                (",","").replace(".","");
+        int interiorTrimInCarbonPriceInt = Integer.parseInt(interiorTrimInCarbonPriceString);
+
+        WebElement performance = driver.findElement(By.id("IMG_subHdl"));
+        jse.executeScript("arguments[0].click();", performance);
+
+        WebElement sevenSpeedPorscheDoppelkupplungPDK = driver.findElement(By.xpath
+                ("//span[@id='vs_table_IMG_x_M250_x_c11_M250']"));
+        jse.executeScript("arguments[0].click();", sevenSpeedPorscheDoppelkupplungPDK);
+
+        WebElement PDKPrice = driver.findElement(By.xpath("//*[@id=\"vs_table_IMG_x_M250\"]/div[1]/div[3]/div"));
+        String PDKPriceString = PDKPrice.getText();
+        PDKPriceString = PDKPriceString.substring(1).replace(",", "").replace(".","");
+        int PDKPriceInt = Integer.parseInt(PDKPriceString);
+
+        WebElement PCCB = driver.findElement(By.xpath("//span[@id='vs_table_IMG_x_M450_x_c81_M450']"));
+        jse.executeScript("arguments[0].click();", PCCB);
+
+        WebElement PCCBPrice = driver.findElement(By.xpath("//*[@id=\"vs_table_IMG_x_M450\"]/div[1]/div[3]/div"));
+        String PCCBPriceString = PCCBPrice.getText();
+        PCCBPriceString = PCCBPriceString.substring(1).replace(",", "").replace(".","");
+        int PCCBPriceInt = Integer.parseInt(PCCBPriceString);
+
+        int totalForEquipment = miamiBluePriceInt + wheelsPriceInt + seatsPriceInt +
+                interiorTrimInCarbonPriceInt + PDKPriceInt + PCCBPriceInt;
+
+        WebElement porsche718PriceForEquipmentElementConfigurator = driver.findElement(By.xpath
+                ("//*[@id='s_iccCca']/div[1]/div[4]/div[2]"));
+        String porsche718PriceForEquipmentStringConfigurator =
+                porsche718PriceForEquipmentElementConfigurator.getText().replace
+                        (",", "").replace(".","").replace("$","");
+        int porsche718PriceForEquipmentIntegerConfigurator = Integer.parseInt
+                (porsche718PriceForEquipmentStringConfigurator);
+
+        Assert.assertTrue(porsche718PriceForEquipmentIntegerConfigurator == totalForEquipment);
+
     }
 
+    @Test(priority = 26)
+    public void test26() {
+        WebElement porsche718 = driver.findElement(By.xpath("//img[@alt='Porsche - 718']"));
+        porsche718.click();
+
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.manage().window().maximize();
+
+        WebElement porsche718PriceElement = driver.findElement(By.cssSelector
+                ("[data-model-id='1'] [class='m-14-model-price']"));
+        porsche718PriceElement.click();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+
+        String currentWindow = driver.getWindowHandle();
+        Set<String> handles = driver.getWindowHandles();
+        for (String each : handles) {
+            if (!currentWindow.equals(each)) {
+                driver.switchTo().window(each);
+                System.out.println("window switched.");
+                break;
+            }
+        }
+
+        WebElement porsche718TotalPriceWebElementConfigurator = driver.findElement(By.xpath
+                ("//div[@class='row highlighted priceTotal separator']//div[@class='cca-price']"));
+        String porsche718TotalPriceStringConfigurator = porsche718TotalPriceWebElementConfigurator.getText().replace
+                ("$","").replace(",","").replace(".","");
+
+        WebElement expandBtn = driver.findElement(By.xpath("//*[@id=\"s_iccCca\"]/div[1]/div[4]/div[1]/span"));
+        expandBtn.click();
+
+        WebElement porsche718BasePriceElementConfigurator = driver.findElement(By.xpath
+                ("//*[@id='s_iccCca']/div[1]/div[2]/div[2]"));
+        String porsche718BasePriceStringConfigurator = porsche718BasePriceElementConfigurator.getText().replace
+                ("$","").replace(",","").replace(".","");
+
+        WebElement porsche718DeliveryProcessingAndHandlingFeeElementConfigurator = driver.findElement(By.xpath
+                ("//*[@id='s_iccCca']/div[1]/div[3]/div[2]"));
+        String porsche718DeliveryProcessingAndHandlingFeeStringConfigurator =
+                porsche718DeliveryProcessingAndHandlingFeeElementConfigurator.getText().replace
+                        ("$","").replace(",","").replace(".","");
+
+        WebElement porsche718PriceForEquipmentElementConfigurator = driver.findElement(By.xpath
+                ("//*[@id='s_iccCca']/div[1]/div[4]/div[2]"));
+        String porsche718PriceForEquipmentStringConfigurator =
+                porsche718PriceForEquipmentElementConfigurator.getText().replace
+                        ("$","").replace(",","").replace(".","");
+
+        int porsche718PriceCombinedConfigurator = Integer.parseInt
+                (porsche718BasePriceStringConfigurator) + Integer.parseInt
+                (porsche718DeliveryProcessingAndHandlingFeeStringConfigurator) + Integer.parseInt
+                (porsche718PriceForEquipmentStringConfigurator);
+
+        Assert.assertTrue
+                (porsche718PriceCombinedConfigurator == Integer.parseInt(porsche718TotalPriceStringConfigurator));
+
+    }
+
+}
