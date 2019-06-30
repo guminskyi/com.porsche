@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.util.concurrent.TimeUnit;
+
 public class Driver {
 	
 	private Driver() {}
@@ -27,7 +29,11 @@ public class Driver {
 				driver = new FirefoxDriver();
 			}
 		}
+		driver.manage().timeouts().implicitlyWait(6, TimeUnit.SECONDS);
+		driver.manage().window().maximize();
+		driver.manage().timeouts().pageLoadTimeout(12, TimeUnit.SECONDS);
 		return driver;
+
 	}
 
 	public static void closeDriver() {
