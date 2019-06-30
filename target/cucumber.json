@@ -9,39 +9,16 @@
             "value": "# comment"
           }
         ],
-        "before": [
-          {
-            "result": {
-              "duration": 6546659902,
-              "status": "passed"
-            },
-            "match": {
-              "location": "Hooks.setUp()"
-            }
-          }
-        ],
         "line": 4,
         "name": "Google search scenario",
         "description": "",
         "id": "this-is-my-first-feature;google-search-scenario",
-        "after": [
-          {
-            "result": {
-              "duration": 462208022,
-              "status": "passed"
-            },
-            "match": {
-              "location": "Hooks.tearDown(Scenario)"
-            }
-          }
-        ],
         "type": "scenario",
         "keyword": "Scenario",
         "steps": [
           {
             "result": {
-              "duration": 258927405,
-              "status": "passed"
+              "status": "skipped"
             },
             "line": 5,
             "name": "User goes to Google application",
@@ -52,8 +29,7 @@
           },
           {
             "result": {
-              "duration": 1146836,
-              "status": "passed"
+              "status": "skipped"
             },
             "line": 6,
             "name": "User searches for apple",
@@ -64,8 +40,7 @@
           },
           {
             "result": {
-              "duration": 61202,
-              "status": "passed"
+              "status": "skipped"
             },
             "line": 7,
             "name": "User should see apple related results",
@@ -76,8 +51,7 @@
           },
           {
             "result": {
-              "duration": 68951,
-              "status": "passed"
+              "status": "skipped"
             },
             "line": 8,
             "name": "User tests something",

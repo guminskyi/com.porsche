@@ -6,10 +6,6 @@ formatter.feature({
   "id": "this-is-my-first-feature",
   "keyword": "Feature"
 });
-formatter.before({
-  "duration": 6546659902,
-  "status": "passed"
-});
 formatter.scenario({
   "comments": [
     {
@@ -54,32 +50,24 @@ formatter.match({
   "location": "PorscheSteps.user_goes_to_Google_application()"
 });
 formatter.result({
-  "duration": 258927405,
-  "status": "passed"
+  "status": "skipped"
 });
 formatter.match({
   "location": "PorscheSteps.user_searches_for_apple()"
 });
 formatter.result({
-  "duration": 1146836,
-  "status": "passed"
+  "status": "skipped"
 });
 formatter.match({
   "location": "PorscheSteps.user_should_see_apple_related_results()"
 });
 formatter.result({
-  "duration": 61202,
-  "status": "passed"
+  "status": "skipped"
 });
 formatter.match({
   "location": "PorscheSteps.user_tests_something()"
 });
 formatter.result({
-  "duration": 68951,
-  "status": "passed"
-});
-formatter.after({
-  "duration": 462208022,
-  "status": "passed"
+  "status": "skipped"
 });
 });
