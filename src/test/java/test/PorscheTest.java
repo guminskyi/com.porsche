@@ -27,19 +27,14 @@ public class PorscheTest {
         driver.get("https://porsche.com/usa/modelstart");
         WebElement porsche718 = driver.findElement(By.xpath("//img[@alt='Porsche - 718']"));
         porsche718.click();
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         WebElement porsche718PriceElement = driver.findElement(By.cssSelector("body.pool-usa.lang-none:nth-child(2)" +
                 " div.b-page-wrapper.page.nonavi:nth-child(1) div.m-14-model-overview.m-14-cc.m-14-model-overview--initialized:nth-child(6)" +
                 " div.m-14-models-view.module-container:nth-child(1) div.module-grid div.m-14-result-row.m-14-result-context.content-full-width div.m-14-model-series.module-grid:nth-child(2)" +
                 " div.m-14-model-tile.visible:nth-child(3) div.m-14-model-tile-link-overview div.m-14-model-tile-title > div.m-14-model-price"));
         porsche718PriceElement.click();
-
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-
         List<String> allHandles = new ArrayList<>(driver.getWindowHandles());
-
         driver.switchTo().window(allHandles.get(1));  // <=== switching to 718 Cayman S window
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         WebElement priceExpandBtn = driver.findElement(By.xpath("//*[@id=\"s_iccCca\"]/div[1]/div[4]/div[1]/span"));
         priceExpandBtn.click();
 
