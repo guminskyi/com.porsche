@@ -1,85 +1,55 @@
-$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("test.feature");
+$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("porsche.feature");
 formatter.feature({
-  "line": 1,
-  "name": "This is my first feature",
+  "line": 2,
+  "name": "Buy a Porsche",
   "description": "",
-  "id": "this-is-my-first-feature",
-  "keyword": "Feature"
-});
-formatter.before({
-  "duration": 6546659902,
-  "status": "passed"
-});
-formatter.scenario({
-  "comments": [
-    {
-      "line": 2,
-      "value": "# comment"
-    }
-  ],
-  "line": 4,
-  "name": "Google search scenario",
-  "description": "",
-  "id": "this-is-my-first-feature;google-search-scenario",
-  "type": "scenario",
-  "keyword": "Scenario",
+  "id": "buy-a-porsche",
+  "keyword": "Feature",
   "tags": [
     {
-      "line": 3,
-      "name": "@goo"
+      "line": 1,
+      "name": "@porsche"
     }
   ]
 });
+formatter.scenario({
+  "line": 4,
+  "name": "a",
+  "description": "",
+  "id": "buy-a-porsche;a",
+  "type": "scenario",
+  "keyword": "Scenario"
+});
 formatter.step({
   "line": 5,
-  "name": "User goes to Google application",
-  "keyword": "When "
+  "name": "User opens the browser and goes to Porsche website",
+  "keyword": "Given "
 });
 formatter.step({
   "line": 6,
-  "name": "User searches for apple",
-  "keyword": "Then "
+  "name": "User selects model \"718\" and stores the price of \"718\" Cayman Model S and clicks on \"718\" Cayman \"S\"",
+  "keyword": "When "
 });
 formatter.step({
   "line": 7,
-  "name": "User should see apple related results",
-  "keyword": "And "
-});
-formatter.step({
-  "line": 8,
-  "name": "User tests something",
-  "keyword": "And "
+  "name": "User verifies that Base price displayed on the page is same as the price from the previous step",
+  "keyword": "Then "
 });
 formatter.match({
-  "location": "PorscheSteps.user_goes_to_Google_application()"
+  "location": "PorscheSteps.user_opens_the_browser_and_goes_to_Porsche_website()"
 });
 formatter.result({
-  "duration": 258927405,
+  "duration": 5489778398,
   "status": "passed"
+});
+formatter.match({});
+formatter.result({
+  "status": "undefined"
 });
 formatter.match({
-  "location": "PorscheSteps.user_searches_for_apple()"
+  "location": "PorscheSteps.user_verifies_that_Base_price_displayed_on_the_page_is_same_as_the_price_from_the_previous_step()"
 });
 formatter.result({
-  "duration": 1146836,
-  "status": "passed"
-});
-formatter.match({
-  "location": "PorscheSteps.user_should_see_apple_related_results()"
-});
-formatter.result({
-  "duration": 61202,
-  "status": "passed"
-});
-formatter.match({
-  "location": "PorscheSteps.user_tests_something()"
-});
-formatter.result({
-  "duration": 68951,
-  "status": "passed"
-});
-formatter.after({
-  "duration": 462208022,
-  "status": "passed"
+  "status": "skipped"
 });
 });

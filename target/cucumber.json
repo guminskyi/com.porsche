@@ -1,104 +1,60 @@
 [
   {
-    "line": 1,
+    "line": 2,
     "elements": [
       {
-        "comments": [
-          {
-            "line": 2,
-            "value": "# comment"
-          }
-        ],
-        "before": [
-          {
-            "result": {
-              "duration": 6546659902,
-              "status": "passed"
-            },
-            "match": {
-              "location": "Hooks.setUp()"
-            }
-          }
-        ],
         "line": 4,
-        "name": "Google search scenario",
+        "name": "a",
         "description": "",
-        "id": "this-is-my-first-feature;google-search-scenario",
-        "after": [
-          {
-            "result": {
-              "duration": 462208022,
-              "status": "passed"
-            },
-            "match": {
-              "location": "Hooks.tearDown(Scenario)"
-            }
-          }
-        ],
+        "id": "buy-a-porsche;a",
         "type": "scenario",
         "keyword": "Scenario",
         "steps": [
           {
             "result": {
-              "duration": 258927405,
+              "duration": 5489778398,
               "status": "passed"
             },
             "line": 5,
-            "name": "User goes to Google application",
+            "name": "User opens the browser and goes to Porsche website",
             "match": {
-              "location": "PorscheSteps.user_goes_to_Google_application()"
+              "location": "PorscheSteps.user_opens_the_browser_and_goes_to_Porsche_website()"
             },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 6,
+            "name": "User selects model \"718\" and stores the price of \"718\" Cayman Model S and clicks on \"718\" Cayman \"S\"",
+            "match": {},
             "keyword": "When "
           },
           {
             "result": {
-              "duration": 1146836,
-              "status": "passed"
-            },
-            "line": 6,
-            "name": "User searches for apple",
-            "match": {
-              "location": "PorscheSteps.user_searches_for_apple()"
-            },
-            "keyword": "Then "
-          },
-          {
-            "result": {
-              "duration": 61202,
-              "status": "passed"
+              "status": "skipped"
             },
             "line": 7,
-            "name": "User should see apple related results",
+            "name": "User verifies that Base price displayed on the page is same as the price from the previous step",
             "match": {
-              "location": "PorscheSteps.user_should_see_apple_related_results()"
+              "location": "PorscheSteps.user_verifies_that_Base_price_displayed_on_the_page_is_same_as_the_price_from_the_previous_step()"
             },
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "duration": 68951,
-              "status": "passed"
-            },
-            "line": 8,
-            "name": "User tests something",
-            "match": {
-              "location": "PorscheSteps.user_tests_something()"
-            },
-            "keyword": "And "
-          }
-        ],
-        "tags": [
-          {
-            "line": 3,
-            "name": "@goo"
+            "keyword": "Then "
           }
         ]
       }
     ],
-    "name": "This is my first feature",
+    "name": "Buy a Porsche",
     "description": "",
-    "id": "this-is-my-first-feature",
+    "id": "buy-a-porsche",
     "keyword": "Feature",
-    "uri": "test.feature"
+    "uri": "porsche.feature",
+    "tags": [
+      {
+        "line": 1,
+        "name": "@porsche"
+      }
+    ]
   }
 ]
